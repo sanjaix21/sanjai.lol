@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The All Blue - Breaking News</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Crimson+Text:wght@400;600&display=swap');
+        
+        /* Custom font import - you'll need to replace this with the actual font file */
+        @font-face {
+            font-family: 'FTY SKRADJHUWN NCV';
+            src: url('path/to/your/font.woff2') format('woff2'),
+                 url('path/to/your/font.woff') format('woff'),
+                 url('./fonts/FtySkradjhuwnNcv2-yZv2.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+        
+        @font-face {
+            font-family: 'thebarstain';
+            src: url('./fonts/ThebarstaindemoExtrude-j9aY7.otf') format('opentype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'FTY SKRADJHUWN NCV', serif;
+            background: #faf8f2;
+            color: #1a1a1a;
+            line-height: 1.4;
+            padding: 20px;
+        }
+        
+        .newspaper {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #fff;
+            box-shadow: 0 0 20px rgba(0,0,0,0.3);
+            border: 3px solid #000;
+            position: relative;
+        }
+        
+        .header {
+            text-align: center;
+            border-bottom: 4px solid #000;
+            padding: 20px;
+            background: #fff;
+        }
+        
+        .masthead {
+            font-family: 'thebarstain', 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 900;
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 0px #ddd;
+        }
+        
+        .date-line {
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-top: 2px solid #000;
+            border-bottom: 2px solid #000;
+            padding: 8px 0;
+            margin-bottom: 20px;
+        }
+        
+        .main-headline {
+            font-family: 'FTY SKRADJHUWN NCV', 'Playfair Display', serif;
+            font-size: 2.8rem;
+            font-weight: 900;
+            text-align: center;
+            letter-spacing: 2px;
+            line-height: 1.1;
+            margin-bottom: 5px;
+            border: 3px solid #000;
+            background: #000;
+            color: #fff;
+            padding: 15px;
+            text-transform: uppercase;
+        }
+        
+        .top-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            border-bottom: 3px solid #000;
+        }
+        
+        .featured-story {
+            padding: 20px;
+            border-right: 2px solid #000;
+        }
+        
+        .services-section {
+            padding: 20px;
+        }
+        
+        .main-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            min-height: 600px;
+        }
+        
+        .left-column {
+            border-right: 2px solid #000;
+            padding: 20px;
+        }
+        
+        .middle-column {
+            border-right: 2px solid #000;
+            padding: 20px;
+        }
+        
+        .right-column {
+            padding: 20px;
+        }
+        
+        .section-title {
+            font-family: 'FTY SKRADJHUWN NCV', 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            border-bottom: 2px solid #000;
+            padding-bottom: 5px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .small-section-title {
+            font-family: 'FTY SKRADJHUWN NCV', 'Playfair Display', serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            border-bottom: 1px solid #000;
+            padding-bottom: 3px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .article {
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #ccc;
+        }
+        
+        .article:last-child {
+            border-bottom: none;
+        }
+        
+        .article-title {
+            font-family: 'FTY SKRADJHUWN NCV', 'Playfair Display', serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            line-height: 1.2;
+        }
+        
+        .article-text {
+            font-size: 0.95rem;
+            text-align: justify;
+            margin-bottom: 8px;
+        }
+        
+        .byline {
+            font-size: 0.85rem;
+            font-style: italic;
+            color: #666;
+            margin-bottom: 5px;
+        }
+        
+        .service-box {
+            border: 2px solid #000;
+            padding: 15px;
+            margin-bottom: 15px;
+            background: #f8f8f8;
+            text-align: center;
+        }
+        
+        .service-title {
+            font-family: 'FTY SKRADJHUWN NCV', 'Playfair Display', serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            color: #000;
+        }
+        
+        .service-subtitle {
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            font-style: italic;
+            color: #444;
+        }
+        
+        .service-link {
+            display: inline-block;
+            background: #000;
+            color: #fff;
+            text-decoration: none;
+            padding: 6px 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 2px solid #000;
+            font-size: 0.8rem;
+        }
+        
+        .service-link:hover {
+            background: #fff;
+            color: #000;
+        }
+        
+        .coming-soon {
+            border: 2px solid #666;
+            padding: 15px;
+            margin-bottom: 15px;
+            background: #f0f0f0;
+            text-align: center;
+        }
+        
+        .coming-soon .service-title {
+            color: #666;
+        }
+        
+        .coming-soon .service-link {
+            background: #666;
+            color: #fff;
+            cursor: not-allowed;
+        }
+        
+        .weather-box {
+            background: #f5f5f5;
+            border: 2px solid #000;
+            padding: 15px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .weather-title {
+            font-family: 'FTY SKRADJHUWN NCV', 'Playfair Display', serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+        
+        .weather-info {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        
+        .ticker {
+            background: #000;
+            color: #fff;
+            padding: 10px;
+            margin-bottom: 15px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            text-align: center;
+            letter-spacing: 1px;
+        }
+        
+        .gold-price {
+            background: #fff5dc;
+            border: 2px solid #000;
+            padding: 15px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .gold-title {
+            font-family: 'FTY SKRADJHUWN NCV', 'Playfair Display', serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+        
+        .gold-info {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        
+        .advertisement {
+            border: 2px solid #000;
+            padding: 15px;
+            margin-bottom: 15px;
+            background: #fffacd;
+            text-align: center;
+        }
+        
+        .ad-title {
+            font-family: 'FTY SKRADJHUWN NCV', 'Playfair Display', serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+        
+        .graph {
+            font-family: 'Courier New', monospace;
+            font-size: 0.7rem;
+            line-height: 1;
+            margin: 10px 0;
+            text-align: center;
+        }
+        
+        .horizontal-section {
+            border-bottom: 2px solid #000;
+            padding: 15px 20px;
+        }
+        
+        .bottom-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            border-top: 2px solid #000;
+        }
+        
+        .bottom-section .column {
+            padding: 20px;
+            border-right: 2px solid #000;
+        }
+        
+        .bottom-section .column:last-child {
+            border-right: none;
+        }
+        
+        /* Font fallback notification */
+        .font-notice {
+            background: #ffebcd;
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 0.9rem;
+            color: #666;
+            text-align: center;
+            font-style: italic;
+        }
+        
+        @media (max-width: 768px) {
+            .top-section {
+                grid-template-columns: 1fr;
+            }
+            
+            .featured-story {
+                border-right: none;
+                border-bottom: 2px solid #000;
+            }
+            
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .left-column, .middle-column {
+                border-right: none;
+                border-bottom: 2px solid #000;
+            }
+            
+            .bottom-section {
+                grid-template-columns: 1fr;
+            }
+            
+            .bottom-section .column {
+                border-right: none;
+                border-bottom: 2px solid #000;
+            }
+            
+            .bottom-section .column:last-child {
+                border-bottom: none;
+            }
+            
+            .masthead {
+                font-size: 2.5rem;
+            }
+            
+            .main-headline {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="newspaper">
+        
+        <div class="header">
+            <div class="masthead">THE ALL BLUE</div>
+            <div class="date-line">FRIDAY, JULY 18, 2025 • SPECIAL EDITION • PRICE: FREE</div>
+            <div class="main-headline" id="mainHeadline">Loading latest news...</div>
+        </div>
+        
+        <div class="top-section">
+            <div class="featured-story">
+                <div class="section-title">Featured Story</div>
+                <div id="featuredNews"></div>
+            </div>
+            
+            <div class="services-section">
+                <div class="small-section-title">Our Services</div>
+                
+                <div class="service-box">
+                    <div class="service-title">KrakenEye</div>
+                    <div class="service-subtitle">Movie Searching Made Simple</div>
+                    <a href="https://krakeneye.sanjai.lol" class="service-link" target="_blank">Visit Now</a>
+                </div>
+                
+                <div class="service-box">
+                    <div class="service-title">My Portfolio</div>
+                    <div class="service-subtitle">See my work & projects</div>
+                    <a href="https://portfolio.sanjai.lol" class="service-link" target="_blank">Visit Now</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="main-content">
+            <div class="left-column">
+                <div class="section-title">Technology & Innovation</div>
+                <div id="techNews"></div>
+            </div>
+            
+            <div class="middle-column">
+                <div class="section-title">Science & Research</div>
+                <div id="scienceNews"></div>
+            </div>
+            
+            <div class="right-column">
+                <div class="weather-box">
+                    <div class="weather-title">Local Weather</div>
+                    <div class="weather-info" id="weatherInfo">Loading weather data...</div>
+                </div>
+                
+                <div class="ticker">
+                    SENSEX ▲ 74,251 | NIFTY 50 ▼ 22,130 | NASDAQ ▲ 17,650 | DOW ▲ 39,480
+                </div>
+                
+                <div class="gold-price">
+                    <div class="gold-title">Gold Price Today</div>
+                    <div class="gold-info">₹7,200/g</div>
+                </div>
+                
+                <div class="graph">
+                    MARKET TREND (30 DAYS)
+                    ▲
+                    │  ▲
+                    │ ▲ │▲
+                    │▲   │ ▲
+                    └─────────────
+                </div>
+            </div>
+        </div>
+        
+        <div class="horizontal-section">
+            <div class="small-section-title">Alternative & Weird News</div>
+            <div id="altNews"></div>
+        </div>
+        
+        <div class="bottom-section">
+            <div class="column">
+                <div class="small-section-title">Coming Soon</div>
+                
+                <div class="coming-soon">
+                    <div class="service-title">SecureMail Pro</div>
+                    <div class="service-subtitle">Encrypted email service</div>
+                    <div class="service-link">Launch Soon</div>
+                </div>
+                
+                <div class="coming-soon">
+                    <div class="service-title">StreamVault</div>
+                    <div class="service-subtitle">Personal streaming platform</div>
+                    <div class="service-link">Launch Soon</div>
+                </div>
+            </div>
+            
+            <div class="column">
+                <div class="small-section-title">Future Services</div>
+                
+                <div class="coming-soon">
+                    <div class="service-title">PrivateVPN</div>
+                    <div class="service-subtitle">Secure browsing solution</div>
+                    <div class="service-link">Launch Soon</div>
+                </div>
+                
+                <div class="coming-soon">
+                    <div class="service-title">PasteBin+</div>
+                    <div class="service-subtitle">Advanced code sharing</div>
+                    <div class="service-link">Launch Soon</div>
+                </div>
+            </div>
+            
+            <div class="column">
+                <div class="small-section-title">Advertisements</div>
+                
+                <div class="coming-soon">
+                    <div class="service-title">PhotoVault</div>
+                    <div class="service-subtitle">Private photo gallery</div>
+                    <div class="service-link">Launch Soon</div>
+                </div>
+                
+                <div class="advertisement">
+                    <div class="ad-title">Join the Digital Revolution</div>
+                    <div>Skilled hackers and developers needed! Build the future with code.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // News API functions
+        async function fetchHackerNews() {
+            try {
+                const response = await fetch('https://hacker-news.firebaseio.com/v0/topstories.json');
+                const storyIds = await response.json();
+                
+                const stories = [];
+                for (let i = 0; i < 8; i++) {
+                    try {
+                        const storyResponse = await fetch(`https://hacker-news.firebaseio.com/v0/item/${storyIds[i]}.json`);
+                        const story = await storyResponse.json();
+                        if (story && story.title) {
+                            stories.push(story);
+                        }
+                    } catch (error) {
+                        console.error('Error fetching story:', error);
+                    }
+                }
+                return stories;
+            } catch (error) {
+                console.error('Error fetching Hacker News:', error);
+                return [];
+            }
+        }
+        
+        async function fetchArxivPapers() {
+            try {
+                const response = await fetch('https://export.arxiv.org/api/query?search_query=all:artificial+intelligence&start=0&max_results=4&sortBy=submittedDate&sortOrder=descending');
+                const text = await response.text();
+                const parser = new DOMParser();
+                const xml = parser.parseFromString(text, 'text/xml');
+                const entries = xml.querySelectorAll('entry');
+                
+                const papers = [];
+                entries.forEach(entry => {
+                    const title = entry.querySelector('title')?.textContent?.trim();
+                    const summary = entry.querySelector('summary')?.textContent?.trim();
+                    const published = entry.querySelector('published')?.textContent?.trim();
+                    
+                    if (title && summary) {
+                        papers.push({
+                            title: title,
+                            summary: summary.substring(0, 200) + '...',
+                            published: published ? new Date(published).toLocaleDateString() : 'Recent'
+                        });
+                    }
+                });
+                
+                return papers;
+            } catch (error) {
+                console.error('Error fetching arXiv papers:', error);
+                return [];
+            }
+        }
+        
+        async function fetchRedditPosts() {
+            try {
+                const subreddits = ['technology', 'linux', 'programming', 'oddlysatisfying', 'mildlyinteresting'];
+                const randomSub = subreddits[Math.floor(Math.random() * subreddits.length)];
+                const response = await fetch(`https://www.reddit.com/r/${randomSub}/hot.json?limit=5`);
+                const data = await response.json();
+                
+                const posts = [];
+                if (data.data && data.data.children) {
+                    data.data.children.forEach(child => {
+                        const post = child.data;
+                        if (post.title && !post.over_18) {
+                            posts.push({
+                                title: post.title,
+                                score: post.score,
+                                subreddit: post.subreddit,
+                                created: new Date(post.created_utc * 1000).toLocaleDateString()
+                            });
+                        }
+                    });
+                }
+                
+                return posts;
+            } catch (error) {
+                console.error('Error fetching Reddit posts:', error);
+                return [];
+            }
+        }
+        
+        function createNewsArticle(title, content, byline, timestamp) {
+            return `
+                <div class="article">
+                    <div class="article-title">${title}</div>
+                    ${byline ? `<div class="byline">${byline}</div>` : ''}
+                    <div class="article-text">${content}</div>
+                    ${timestamp ? `<div class="byline">Published: ${timestamp}</div>` : ''}
+                </div>
+            `;
+        }
+        
+        function displayFeaturedNews(stories) {
+            const featuredDiv = document.getElementById('featuredNews');
+            if (stories.length > 0) {
+                const story = stories[0];
+                const timestamp = story.time ? new Date(story.time * 1000).toLocaleDateString() : '';
+                featuredDiv.innerHTML = createNewsArticle(
+                    story.title,
+                    `This breaking story has captured the attention of the technology community. Sources indicate significant developments are underway that could reshape the digital landscape as we know it.`,
+                    'By Senior Technology Correspondent',
+                    timestamp
+                );
+            }
+        }
+        
+        function displayTechNews(stories) {
+            const techNewsDiv = document.getElementById('techNews');
+            let html = '';
+            
+            stories.slice(1, 4).forEach(story => {
+                const timestamp = story.time ? new Date(story.time * 1000).toLocaleDateString() : '';
+                html += createNewsArticle(
+                    story.title,
+                    `Breaking developments in technology sector. Industry experts weigh in on implications for the digital future.`,
+                    'By Tech Correspondent',
+                    timestamp
+                );
+            });
+            
+            techNewsDiv.innerHTML = html;
+        }
+        
+        function displayScienceNews(papers) {
+            const scienceNewsDiv = document.getElementById('scienceNews');
+            let html = '';
+            
+            papers.slice(0, 3).forEach(paper => {
+                html += createNewsArticle(
+                    paper.title,
+                    paper.summary,
+                    'By Research Correspondent',
+                    paper.published
+                );
+            });
+            
+            scienceNewsDiv.innerHTML = html;
+        }
+        
+        function displayAltNews(posts) {
+            const altNewsDiv = document.getElementById('altNews');
+            let html = '';
+            
+            posts.slice(0, 2).forEach(post => {
+                html += createNewsArticle(
+                    post.title,
+                    `Community discussion gaining traction on r/${post.subreddit}. Score: ${post.score} points. This unusual story has captured the imagination of internet users worldwide.`,
+                    'By Alternative Media',
+                    post.created
+                );
+            });
+            
+            // Add some fake weird news
+            html += createNewsArticle(
+                'Local Developer Discovers Coffee Machine Has Secret API',
+                'In a shocking turn of events, a programmer has successfully reverse-engineered their office coffee machine, leading to unprecedented caffeine optimization protocols.',
+                'By Weird News Bureau',
+                'Today'
+            );
+            
+            altNewsDiv.innerHTML = html;
+        }
+        
+        async function loadAllNews() {
+            try {
+                const [hackerNews, arxivPapers, redditPosts] = await Promise.all([
+                    fetchHackerNews(),
+                    fetchArxivPapers(),
+                    fetchRedditPosts()
+                ]);
+                
+                displayFeaturedNews(hackerNews);
+                displayTechNews(hackerNews);
+                displayScienceNews(arxivPapers);
+                displayAltNews(redditPosts);
+                
+                // Update main headline
+                if (hackerNews.length > 0) {
+                    document.getElementById('mainHeadline').textContent = hackerNews[0].title.toUpperCase();
+                }
+            } catch (error) {
+                console.error('Error loading news:', error);
+                // Fallback content
+                document.getElementById('featuredNews').innerHTML = createNewsArticle(
+                    'Digital Infrastructure Expands Globally',
+                    'Technology companies continue to push the boundaries of what\'s possible in the digital realm. This comprehensive report examines the latest developments.',
+                    'By Senior Technology Correspondent',
+                    'Today'
+                );
+            }
+        }
+        
+        // Weather fetching function
+        async function fetchWeather() {
+            const weatherElement = document.getElementById('weatherInfo');
+            
+            try {
+                const response = await fetch('https://wttr.in/Phagwara?format=3');
+                if (response.ok) {
+                    const weatherData = await response.text();
+                    weatherElement.textContent = weatherData.trim();
+                } else {
+                    throw new Error('Weather service unavailable');
+                }
+            } catch (error) {
+                weatherElement.textContent = 'Weather data unavailable';
+            }
+        }
+        
+        // Initialize everything
+        document.addEventListener('DOMContentLoaded', () => {
+            loadAllNews();
+            fetchWeather();
+            
+            // Update news every 30 minutes
+            setInterval(loadAllNews, 1800000);
+        });
+    </script>
+</body>
+</html>

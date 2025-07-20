@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Daily Prophet - Sanjai's Magical Corner</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Crimson+Text:wght@400;600&display=swap');
+        
+        /* Custom magical fonts */
+        @font-face {
+            font-family: 'FTY SKRADJHUWN NCV';
+            src: url('path/to/your/font.woff2') format('woff2'),
+                 url('path/to/your/font.woff') format('woff'),
+                 url('./fonts/FtySkradjhuwnNcv2-yZv2.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+        
+        @font-face {
+            font-family: 'thebarstain';
+            src: url('./fonts/ThebarstaindemoExtrude-j9aY7.otf') format('opentype');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Cinzel', 'FTY SKRADJHUWN NCV', serif;
+            background: linear-gradient(135deg, #0d1b2a, #1b263b, #415a77);
+            background-image: 
+                radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 213, 79, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(236, 72, 153, 0.2) 0%, transparent 50%);
+            color: #2c3e50;
+            line-height: 1.4;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .newspaper {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: linear-gradient(145deg, #f8f6f0, #e8e4d8);
+            box-shadow: 
+                0 0 30px rgba(0,0,0,0.5),
+                inset 0 0 100px rgba(139, 69, 19, 0.1);
+            border: 4px solid #8b4513;
+            border-radius: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .newspaper::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                repeating-linear-gradient(
+                    45deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(139, 69, 19, 0.05) 2px,
+                    rgba(139, 69, 19, 0.05) 4px
+                );
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .magical-border {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            border: 2px solid #d4af37;
+            border-radius: 10px;
+            box-shadow: 
+                0 0 20px rgba(212, 175, 55, 0.3),
+                inset 0 0 20px rgba(212, 175, 55, 0.2);
+            pointer-events: none;
+            z-index: 2;
+        }
+        
+        .header {
+            text-align: center;
+            border-bottom: 4px solid #8b4513;
+            padding: 25px;
+            background: linear-gradient(145deg, #f4f1ea, #e6dcc9);
+            position: relative;
+            z-index: 3;
+            border-radius: 10px 10px 0 0;
+        }
+        
+        .masthead {
+            font-family: 'thebarstain', 'Cinzel', serif;
+            font-size: 3.8rem;
+            font-weight: 900;
+            letter-spacing: 4px;
+            margin-bottom: 15px;
+            background: linear-gradient(45deg, #8b4513, #d4af37, #8b4513);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 2px 2px 4px rgba(139, 69, 19, 0.3);
+            filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.5));
+        }
+        
+        .subtitle {
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
+            color: #8b4513;
+            font-style: italic;
+            margin-bottom: 10px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        .date-line {
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-top: 2px solid #8b4513;
+            border-bottom: 2px solid #8b4513;
+            padding: 10px 0;
+            margin-bottom: 20px;
+            background: linear-gradient(90deg, rgba(212, 175, 55, 0.1), rgba(139, 69, 19, 0.1), rgba(212, 175, 55, 0.1));
+        }
+        
+        .main-headline {
+            font-family: 'FTY SKRADJHUWN NCV', 'Cinzel', serif;
+            font-size: 2.8rem;
+            font-weight: 900;
+            text-align: center;
+            letter-spacing: 2px;
+            line-height: 1.1;
+            margin-bottom: 5px;
+            border: 3px solid #8b4513;
+            background: linear-gradient(135deg, #8b4513, #a0522d);
+            color: #f8f6f0;
+            padding: 20px;
+            text-transform: uppercase;
+            box-shadow: 
+                0 5px 15px rgba(0,0,0,0.3),
+                inset 0 0 20px rgba(212, 175, 55, 0.2);
+            border-radius: 8px;
+        }
+        
+        .welcome-section {
+            background: linear-gradient(145deg, #f8f6f0, #e8e4d8);
+            border: 3px solid #d4af37;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px;
+            text-align: center;
+            box-shadow: 
+                0 8px 25px rgba(0,0,0,0.2),
+                inset 0 0 30px rgba(212, 175, 55, 0.1);
+            position: relative;
+            z-index: 3;
+        }
+        
+        .welcome-gif {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 4px solid #d4af37;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.4);
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .welcome-title {
+            font-family: 'Cinzel', serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #8b4513;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .welcome-text {
+            font-family: 'Crimson Text', serif;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #2c3e50;
+            max-width: 600px;
+            margin: 0 auto;
+            font-style: italic;
+        }
+        
+        .top-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            border-bottom: 3px solid #8b4513;
+            position: relative;
+            z-index: 3;
+        }
+        
+        .featured-story {
+            padding: 25px;
+            border-right: 2px solid #8b4513;
+            background: linear-gradient(145deg, #f8f6f0, #e8e4d8);
+        }
+        
+        .services-section {
+            padding: 25px;
+            background: linear-gradient(145deg, #f4f1ea, #e6dcc9);
+        }
+        
+        .main-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            min-height: 600px;
+            position: relative;
+            z-index: 3;
+        }
+        
+        .left-column {
+            border-right: 2px solid #8b4513;
+            padding: 25px;
+            background: linear-gradient(145deg, #f8f6f0, #e8e4d8);
+        }
+        
+        .middle-column {
+            border-right: 2px solid #8b4513;
+            padding: 25px;
+            background: linear-gradient(145deg, #f4f1ea, #e6dcc9);
+        }
+        
+        .right-column {
+            padding: 25px;
+            background: linear-gradient(145deg, #f8f6f0, #e8e4d8);
+        }
+        
+        .section-title {
+            font-family: 'FTY SKRADJHUWN NCV', 'Cinzel', serif;
+            font-size: 1.9rem;
+            font-weight: 700;
+            border-bottom: 3px solid #d4af37;
+            padding-bottom: 8px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #8b4513;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(90deg, #8b4513, #d4af37);
+            border-radius: 2px;
+        }
+        
+        .small-section-title {
+            font-family: 'FTY SKRADJHUWN NCV', 'Cinzel', serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            border-bottom: 2px solid #d4af37;
+            padding-bottom: 5px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #8b4513;
+        }
+        
+        .article {
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(139, 69, 19, 0.3);
+            background: rgba(248, 246, 240, 0.5);
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .article:last-child {
+            border-bottom: none;
+        }
+        
+        .article-title {
+            font-family: 'FTY SKRADJHUWN NCV', 'Cinzel', serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            line-height: 1.3;
+            color: #8b4513;
+        }
+        
+        .article-text {
+            font-family: 'Crimson Text', serif;
+            font-size: 1rem;
+            text-align: justify;
+            margin-bottom: 10px;
+            color: #2c3e50;
+            line-height: 1.5;
+        }
+        
+        .byline {
+            font-size: 0.9rem;
+            font-style: italic;
+            color: #8b4513;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        
+        .service-box {
+            border: 3px solid #d4af37;
+            padding: 20px;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #f8f6f0, #f4f1ea);
+            text-align: center;
+            border-radius: 12px;
+            box-shadow: 
+                0 8px 25px rgba(0,0,0,0.15),
+                inset 0 0 20px rgba(212, 175, 55, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .service-box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(212, 175, 55, 0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.6s ease;
+            opacity: 0;
+        }
+        
+        .service-box:hover::before {
+            opacity: 1;
+            animation: shimmer 1.5s ease-in-out;
+        }
+        
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) rotate(45deg); }
+        }
+        
+        .service-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 
+                0 15px 35px rgba(0,0,0,0.2),
+                inset 0 0 30px rgba(212, 175, 55, 0.2);
+        }
+        
+        .service-title {
+            font-family: 'FTY SKRADJHUWN NCV', 'Cinzel', serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            color: #8b4513;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .service-subtitle {
+            font-size: 1rem;
+            margin-bottom: 15px;
+            font-style: italic;
+            color: #555;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .service-credentials {
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            background: rgba(139, 69, 19, 0.1);
+            border: 1px solid #d4af37;
+            border-radius: 6px;
+            padding: 8px;
+            margin-bottom: 15px;
+            color: #8b4513;
+            font-weight: 600;
+        }
+        
+        .service-link {
+            display: inline-block;
+            background: linear-gradient(135deg, #8b4513, #a0522d);
+            color: #f8f6f0;
+            text-decoration: none;
+            padding: 10px 20px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 2px solid #d4af37;
+            font-size: 0.9rem;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 4px 15px rgba(139, 69, 19, 0.3);
+        }
+        
+        .service-link:hover {
+            background: linear-gradient(135deg, #d4af37, #f4e87c);
+            color: #8b4513;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
+        }
+        
+        .coming-soon {
+            border: 3px solid rgba(139, 69, 19, 0.5);
+            padding: 20px;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #f0f0f0, #e8e8e8);
+            text-align: center;
+            border-radius: 12px;
+            opacity: 0.7;
+            position: relative;
+        }
+        
+        .coming-soon .service-title {
+            color: #8b4513;
+            opacity: 0.8;
+        }
+        
+        .coming-soon .service-link {
+            background: rgba(139, 69, 19, 0.6);
+            color: #f8f6f0;
+            cursor: not-allowed;
+            opacity: 0.8;
+        }
+        
+        .weather-box {
+            background: linear-gradient(135deg, #e8f4fd, #b3d9ff);
+            border: 3px solid #4a90e2;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(74, 144, 226, 0.3);
+        }
+        
+        .weather-title {
+            font-family: 'FTY SKRADJHUWN NCV', 'Cinzel', serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            color: #2c5282;
+        }
+        
+        .weather-info {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #2c5282;
+        }
+        
+        .ticker {
+            background: linear-gradient(135deg, #1a202c, #2d3748);
+            color: #f8f6f0;
+            padding: 15px;
+            margin-bottom: 20px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            text-align: center;
+            letter-spacing: 1px;
+            border-radius: 10px;
+            border: 2px solid #d4af37;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        
+        .gold-price {
+            background: linear-gradient(135deg, #fff8dc, #f0e68c);
+            border: 3px solid #daa520;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(218, 165, 32, 0.3);
+        }
+        
+        .gold-title {
+            font-family: 'FTY SKRADJHUWN NCV', 'Cinzel', serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            color: #b8860b;
+        }
+        
+        .gold-info {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #b8860b;
+        }
+        
+        .advertisement {
+            border: 3px solid #d4af37;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #fffacd, #f5f5dc);
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.2);
+        }
+        
+        .ad-title {
+            font-family: 'FTY SKRADJHUWN NCV', 'Cinzel', serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            color: #8b4513;
+        }
+        
+        .graph {
+            font-family: 'Courier New', monospace;
+            font-size: 0.7rem;
+            line-height: 1;
+            margin: 15px 0;
+            text-align: center;
+            color: #8b4513;
+            background: rgba(248, 246, 240, 0.5);
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid rgba(139, 69, 19, 0.3);
+        }
+        
+        .horizontal-section {
+            border-bottom: 2px solid #8b4513;
+            padding: 25px;
+            background: linear-gradient(145deg, #f4f1ea, #e6dcc9);
+            position: relative;
+            z-index: 3;
+        }
+        
+        .bottom-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            border-top: 2px solid #8b4513;
+            position: relative;
+            z-index: 3;
+        }
+        
+        .bottom-section .column {
+            padding: 25px;
+            border-right: 2px solid #8b4513;
+        }
+        
+        .bottom-section .column:nth-child(1) {
+            background: linear-gradient(145deg, #f8f6f0, #e8e4d8);
+        }
+        
+        .bottom-section .column:nth-child(2) {
+            background: linear-gradient(145deg, #f4f1ea, #e6dcc9);
+        }
+        
+        .bottom-section .column:nth-child(3) {
+            background: linear-gradient(145deg, #f8f6f0, #e8e4d8);
+            border-right: none;
+        }
+        
+        @media (max-width: 768px) {
+            .top-section {
+                grid-template-columns: 1fr;
+            }
+            
+            .featured-story {
+                border-right: none;
+                border-bottom: 2px solid #8b4513;
+            }
+            
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .left-column, .middle-column {
+                border-right: none;
+                border-bottom: 2px solid #8b4513;
+            }
+            
+            .bottom-section {
+                grid-template-columns: 1fr;
+            }
+            
+            .bottom-section .column {
+                border-right: none;
+                border-bottom: 2px solid #8b4513;
+            }
+            
+            .bottom-section .column:last-child {
+                border-bottom: none;
+            }
+            
+            .masthead {
+                font-size: 2.8rem;
+            }
+            
+            .main-headline {
+                font-size: 2rem;
+            }
+            
+            .welcome-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="newspaper">
+        <div class="magical-border"></div>
+        
+        <div class="header">
+            <div class="masthead">THE DAILY PROPHET</div>
+            <div class="subtitle">✨ Sanjai's Magical Corner of the Internet ✨</div>
+            <div class="date-line">FRIDAY, JULY 18, 2025 • SPECIAL EDITION • PRICE: FREE</div>
+            <div class="main-headline" id="mainHeadline">Loading latest magical news...</div>
+        </div>
+        
+        <div class="welcome-section">
+            <img src="bigchill.gif" alt="Sanjai's Avatar" class="welcome-gif" onerror="this.style.display='none'">
+            <div class="welcome-title">Welcome, Fellow Wizard! 🧙‍♂️</div>
+            <div class="welcome-text">
+                Hi! I'm Sanjai, aka Flightman, and this is my little corner of the internet. 
+                I like computers and... stuffs? Stuffs! I am pretty bad at explaining myself, nevertheless, 
+                I have huge dreams for this site. Thanks for being a part of it and joining me on this magical journey! ✨
+            </div>
+        </div>
+        
+        <div class="top-section">
+            <div class="featured-story">
+                <div class="section-title">Featured Magical Story</div>
+                <div id="featuredNews"></div>
+            </div>
+            
+            <div class="services-section">
+                <div class="small-section-title">🔮 Magical Services</div>
+                
+                <div class="service-box">
+                    <div class="service-title">StreamVault</div>
+                    <div class="service-subtitle">Personal streaming platform</div>
+                    <div class="service-credentials">
+                        🔐 Username: guest<br>
+                        🗝️ Password: guest
+                    </div>
+                    <a href="https://tv.sanjai.lol" class="service-link" target="_blank">Enter Vault</a>
+                </div>
+                
+                <div class="service-box">
+                    <div class="service-title">KrakenEye</div>
+                    <div class="service-subtitle">Movie Searching Made Simple</div>
+                    <a href="https://krakeneye.sanjai.lol" class="service-link" target="_blank">Search Now</a>
+                </div>
+                
+                <div class="service-box">
+                    <div class="service-title">My Portfolio</div>
+                    <div class="service-subtitle">See my work & magical projects</div>
+                    <a href="https://portfolio.sanjai.lol" class="service-link" target="_blank">Explore Magic</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="main-content">
+            <div class="left-column">
+                <div class="section-title">⚡ Technology & Innovation</div>
+                <div id="techNews"></div>
+            </div>
+            
+            <div class="middle-column">
+                <div class="section-title">🧪 Science & Magical Research</div>
+                <div id="scienceNews"></div>
+            </div>
+            
+            <div class="right-column">
+                <div class="weather-box">
+                    <div class="weather-title">🌤️ Magical Weather</div>
+                    <div class="weather-info" id="weatherInfo">Loading weather spells...</div>
+                </div>
+                
+                <div class="ticker">
+                    🏛️ SENSEX ▲ 74,251 | NIFTY 50 ▼ 22,130 | NASDAQ ▲ 17,650 | DOW ▲ 39,480
+                </div>
+                
+                <div class="gold-price">
+                    <div class="gold-title">💰 Gold Price Today (24K)</div>
+                    <div class="gold-info" id="goldPrice">Counting galleons...</div>
+                </div>
+                
+                <div class="graph">
+                    MAGICAL MARKET TREND (30 DAYS)
+                    ⚡
+                    │  ▲
+                    │ ▲ │▲
+                    │▲   │ ▲
+                    └─────────────
+                </div>
+            </div>
+        </div>
+        
+        <div class="horizontal-section">
+            <div class="small-section-title">🎭 Alternative & Weird Magical News</div>
+            <div id="altNews"></div>
+        </div>
+        
+        <div class="bottom-section">
+            <div class="column">
+                <div class="small-section-title">🔮 Coming Soon</div>
+                
+                <div class="coming-soon">
+                    <div class="service-title">SecureMail Pro</div>
+                    <div class="service-subtitle">Encrypted owl delivery service</div>
+                    <div class="service-link">Hatching Soon</div>
+                </div>
+                
+                <div class="coming-soon">
+                    <div class="service-title">PrivateVPN</div>
+                    <div class="service-subtitle">Secure floo network browsing</div>
+                    <div class="service-link">Brewing Soon</div>
+                </div>
+            </div>
+            
+            <div class="column">
+                <div class="small-section-title">🌟 Future Magical Services</div>
+                
+                <div class="coming-soon">
+                    <div class="service-title">PasteBin+</div>
+                    <div class="service-subtitle">Advanced spell sharing</div>
+                    <div class="service-link">Enchanting Soon</div>
+                </div>
+                
+                <div class="coming-soon">
+                    <div class="service-title">PhotoVault</div>
+                    <div class="service-subtitle">Private moving pictures gallery</div>
+                    <div class="service-link">Developing Soon</div>
+                </div>
+            </div>
+            
+            <div class="column">
+                <div class="small-section-title">📜 Magical Advertisements</div>
+                
+                <div class="advertisement">
+                    <div class="ad-title">🧙‍♂️ Join the Digital Revolution</div>
+                    <div>Skilled wizards and code-mancers needed! Build the future with magical code and spells! ✨</div>
+                </div>
+                
+                <div class="advertisement">
+                    <div class="ad-title">⚡ Hogwarts IT Department</div>
+                    <div>Now hiring: Junior spell-debuggers and senior hex-optimizers. Owl your resume today! 🦉</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Magical news API functions with Harry Potter themed content
+        async function fetchHackerNews() {
+            try {
+                const response = await fetch('https://hacker-news.firebaseio.com/v0/topstories.json');
+                const storyIds = await response.json();
+                
+                const stories = [];
+                for (let i = 0; i < 8; i++) {
+                    try {
+                        const storyResponse = await fetch(`https://hacker-news.firebaseio.com/v0/item/${storyIds[i]}.json`);
+                        const story = await storyResponse.json();
+                        if (story && story.title) {
+                            stories.push(story);
+                        }
+                    } catch (error) {
+                        console.error('Error fetching magical story:', error);
+                    }
+                }
+                return stories;
+            } catch (error) {
+                console.error('Error fetching Magical News Network:', error);
+                return [];
+            }
+        }
+        
+        async function fetchArxivPapers() {
+            try {
+                const response = await fetch('https://export.arxiv.org/api/query?search_query=all:artificial+intelligence&start=0&max_results=4&sortBy=submittedDate&sortOrder=descending');
+                const text = await response.text();
+                const parser = new DOMParser();
+                const xml = parser.parseFromString(text, 'text/xml');
+                const entries = xml.querySelectorAll('entry');
+                
+                const papers = [];
+                entries.forEach(entry => {
+                    const title = entry.querySelector('title')?.textContent?.trim();
+                    const summary = entry.querySelector('summary')?.textContent?.trim();
+                    const published = entry.querySelector('published')?.textContent?.trim();
+                    
+                    if (title && summary) {
+                        papers.push({
+                            title: title,
+                            summary: summary.substring(0, 200) + '...',
+                            published: published ? new Date(published).toLocaleDateString() : 'Recent'
+                        });
+                    }
+                });
+                
+                return papers;
+            } catch (error) {
+                console.error('Error fetching Department of Mysteries research:', error);
+                return [];
+            }
+        }
+        
+        async function fetchRedditPosts() {
+            try {
+                const subreddits = ['technology', 'linux', 'programming', 'oddlysatisfying', 'mildlyinteresting'];
+                const randomSub = subreddits[Math.floor(Math.random() * subreddits.length)];
+                const response = await fetch(`https://www.reddit.com/r/${randomSub}/hot.json?limit=5`);
+                const data = await response.json();
+                
+                const posts = [];
+                if (data.data && data.data.children) {
+                    data.data.children.forEach(child => {
+                        const post = child.data;
+                        if (post.title && !post.over_18) {
+                            posts.push({
+                                title: post.title,
+                                score: post.score,
+                                subreddit: post.subreddit,
+                                created: new Date(post.created_utc * 1000).toLocaleDateString()
+                            });
+                        }
+                    });
+                }
+                
+                return posts;
+            } catch (error) {
+                console.error('Error fetching Wizard Wireless Network posts:', error);
+                return [];
+            }
+        }
+        
+        function createMagicalNewsArticle(title, content, byline, timestamp) {
+            return `
+                <div class="article">
+                    <div class="article-title">${title}</div>
+                    ${byline ? `<div class="byline">${byline}</div>` : ''}
+                    <div class="article-text">${content}</div>
+                    ${timestamp ? `<div class="byline">Published: ${timestamp}</div>` : ''}
+                </div>
+            `;
+        }
+        
+        function displayFeaturedNews(stories) {
+            const featuredDiv = document.getElementById('featuredNews');
+            if (stories.length > 0) {
+                const story = stories[0];
+                const timestamp = story.time ? new Date(story.time * 1000).toLocaleDateString() : '';
+                featuredDiv.innerHTML = createMagicalNewsArticle(
+                    story.title,
+                    `🔮 This enchanting story has captured the attention of the entire magical technology community. Ancient runes suggest significant developments are underway that could reshape the digital realm as we know it. The Department of Magical Accidents and Catastrophes has been notified of potential reality-altering consequences.`,
+                    '⚡ By Senior Magical Technology Correspondent Rita Skeeter',
+                    timestamp
+                );
+            }
+        }
+        
+        function displayTechNews(stories) {
+            const techNewsDiv = document.getElementById('techNews');
+            let html = '';
+            
+            const magicalPrefixes = [
+                '🧙‍♂️ Wizard developers discover',
+                '⚡ Hogwarts IT department announces',
+                '🔮 Ministry of Magic approves',
+                '🪄 Magical breakthrough in',
+                '✨ Enchanted algorithms reveal'
+            ];
+            
+            stories.slice(1, 4).forEach((story, index) => {
+                const timestamp = story.time ? new Date(story.time * 1000).toLocaleDateString() : '';
+                const prefix = magicalPrefixes[index % magicalPrefixes.length];
+                html += createMagicalNewsArticle(
+                    story.title,
+                    `${prefix} groundbreaking developments in the magical technology sector. Ancient spellbooks indicate these innovations could revolutionize how wizards interact with both magical and muggle technology. The Wizengamot is currently reviewing the implications for the International Statute of Secrecy. 🦉`,
+                    '🌟 By Magical Tech Correspondent Luna Lovegood',
+                    timestamp
+                );
+            });
+            
+            techNewsDiv.innerHTML = html;
+        }
+        
+        function displayScienceNews(papers) {
+            const scienceNewsDiv = document.getElementById('scienceNews');
+            let html = '';
+            
+            const magicalResearchPrefixes = [
+                '🧪 Department of Mysteries reveals:',
+                '🔬 Potions Master discovers:',
+                '📚 Ancient magic research shows:',
+                '🌙 Astronomy Tower observations confirm:'
+            ];
+            
+            papers.slice(0, 3).forEach((paper, index) => {
+                const prefix = magicalResearchPrefixes[index % magicalResearchPrefixes.length];
+                const magicalSummary = paper.summary.replace(/AI|artificial intelligence/gi, 'magical intelligence')
+                    .replace(/algorithm/gi, 'spell')
+                    .replace(/machine learning/gi, 'divination studies')
+                    .replace(/neural network/gi, 'thought-web enchantment')
+                    .replace(/data/gi, 'magical essence');
+                
+                html += createMagicalNewsArticle(
+                    paper.title.replace(/AI|Artificial Intelligence/gi, 'Magical Intelligence'),
+                    `${prefix} ${magicalSummary} This groundbreaking research from the Department of Mysteries could change how we understand the intersection of magic and logic. 🔮✨`,
+                    '🧙‍♀️ By Chief Research Witch Hermione Granger',
+                    paper.published
+                );
+            });
+            
+            scienceNewsDiv.innerHTML = html;
+        }
+        
+        function displayAltNews(posts) {
+            const altNewsDiv = document.getElementById('altNews');
+            let html = '';
+            
+            const magicalLocations = [
+                'Diagon Alley', 'Hogsmeade', 'The Burrow', 'Grimmauld Place', 'Shell Cottage'
+            ];
+            
+            posts.slice(0, 2).forEach(post => {
+                const location = magicalLocations[Math.floor(Math.random() * magicalLocations.length)];
+                html += createMagicalNewsArticle(
+                    post.title + ' - Muggles Baffled! 🤔',
+                    `🗞️ Magical community discussion gaining traction on the Wizard Wireless Network (Channel ${post.subreddit}). Popularity: ${post.score} owl votes. This peculiar story has captured the imagination of both magical and non-magical folk across ${location}. The Ministry's Muggle-Worthy Excuse Committee is investigating potential statute violations. 🦉✨`,
+                    '📰 By Investigative Reporter Colin Creevey',
+                    post.created
+                );
+            });
+            
+            // Add some magical weird news
+            html += createMagicalNewsArticle(
+                '🍯 Local Developer Discovers Coffee Machine Has Secret Magical API',
+                `⚡ In a shocking turn of events, a programmer-wizard has successfully reverse-engineered their office coffee machine using ancient runes and JavaScript spells, leading to unprecedented caffeine optimization protocols. The machine now responds to voice commands in Parseltongue and automatically brews the perfect potion based on the drinker's coding stress levels. Dumbledore's Army of Developers is requesting the source code. 🐍☕`,
+                '🔮 By Weird Magical News Bureau',
+                'Today'
+            );
+            
+            html += createMagicalNewsArticle(
+                '🦉 Hogwarts WiFi Password Finally Changed After 1000 Years',
+                `🏰 After centuries of using "alohomora123", Hogwarts School has finally updated their magical internet password to "expelliarmus456". IT ghost Nearly Headless Nick commented, "It was about time! Even the portraits were complaining about the security." The new password includes special characters: ⚡🔮🦉`,
+                '👻 By Nearly Headless Nick, IT Support Ghost',
+                'Yesterday'
+            );
+            
+            altNewsDiv.innerHTML = html;
+        }
+        
+        async function loadAllMagicalNews() {
+            try {
+                const [hackerNews, arxivPapers, redditPosts] = await Promise.all([
+                    fetchHackerNews(),
+                    fetchArxivPapers(),
+                    fetchRedditPosts()
+                ]);
+                
+                displayFeaturedNews(hackerNews);
+                displayTechNews(hackerNews);
+                displayScienceNews(arxivPapers);
+                displayAltNews(redditPosts);
+                
+                // Update main headline with magical flair
+                if (hackerNews.length > 0) {
+                    document.getElementById('mainHeadline').textContent = 
+                        '⚡ ' + hackerNews[0].title.toUpperCase() + ' - MAGIC CONFIRMED! ⚡';
+                }
+            } catch (error) {
+                console.error('Error loading magical news:', error);
+                // Magical fallback content
+                document.getElementById('featuredNews').innerHTML = createMagicalNewsArticle(
+                    '🏰 Digital Hogwarts Infrastructure Expands Globally',
+                    `⚡ The magical technology companies continue to push the boundaries of what's possible in both the wizarding and muggle digital realms. This comprehensive report from the Department of Magical Accidents and Catastrophes examines the latest enchanted developments. Owl post delivery times have improved by 300% thanks to GPS-enabled familiar tracking systems. 🦉✨`,
+                    '🧙‍♀️ By Senior Magical Technology Correspondent',
+                    'Today'
+                );
+                
+                document.getElementById('mainHeadline').textContent = 
+                    '⚡ MAGICAL DIGITAL REVOLUTION SWEEPS THE WIZARDING WORLD! ⚡';
+            }
+        }
+        
+        // Enhanced weather fetching with magical flair
+        async function fetchMagicalWeather() {
+            const weatherElement = document.getElementById('weatherInfo');
+            
+            try {
+                const response = await fetch('https://wttr.in/Phagwara?format=3');
+                if (response.ok) {
+                    const weatherData = await response.text();
+                    const magicalWeather = weatherData.trim() + ' 🌟\n(No dementors detected)';
+                    weatherElement.innerHTML = magicalWeather;
+                } else {
+                    throw new Error('Crystal ball cloudy');
+                }
+            } catch (error) {
+                weatherElement.innerHTML = '🔮 Crystal ball maintenance<br>☁️ Divination class postponed';
+            }
+        }
+        
+        // Enhanced gold price fetching with galleon conversion
+        async function fetchMagicalGoldPrice() {
+            const goldElement = document.getElementById('goldPrice');
+            
+            try {
+                const myHeaders = new Headers();
+                myHeaders.append("x-access-token", "goldapi-84xysmdat7oe4-io");
+                myHeaders.append("Content-Type", "application/json");
+
+                const requestOptions = {
+                    method: 'GET',
+                    headers: myHeaders,
+                    redirect: 'follow'
+                };
+
+                const response = await fetch("https://www.goldapi.io/api/XAU/INR", requestOptions);
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    const price24k = data.price_gram_24k;
+                    const galleonPrice = Math.floor(price24k / 17); // Magical conversion rate
+                    goldElement.innerHTML = `₹${price24k.toFixed(0)}/g<br>🪙 ${galleonPrice} Galleons/g`;
+                } else {
+                    throw new Error('Gringotts vault locked');
+                }
+            } catch (error) {
+                console.error('Error accessing Gringotts gold reserves:', error);
+                goldElement.innerHTML = '₹7,200/g<br>🪙 423 Galleons/g<br><small>(Goblin strike affecting rates)</small>';
+            }
+        }
+        
+        // Magical initialization
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('🧙‍♂️ Welcome to Sanjai\'s magical corner! ✨');
+            
+            loadAllMagicalNews();
+            fetchMagicalWeather();
+            fetchMagicalGoldPrice();
+            
+            // Update magical news every 30 minutes (1800000 ms)
+            setInterval(loadAllMagicalNews, 1800000);
+            
+            // Update gold price every 5 minutes with magical notifications
+            setInterval(() => {
+                fetchMagicalGoldPrice();
+                console.log('🪙 Gringotts exchange rates updated!');
+            }, 300000);
+            
+            // Add some magical sparkles
+            setInterval(() => {
+                if (Math.random() > 0.7) {
+                    console.log('✨ *magical sparkles* ✨');
+                }
+            }, 10000);
+        });
+        
+        // Magical error handler
+        window.addEventListener('error', (e) => {
+            console.log('🧙‍♂️ A wild magical bug appeared! Calling Hermione... 📚');
+        });
+        
+        // Easter egg: Konami code for extra magic
+        let konamiCode = [];
+        const konamiSequence = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'KeyB', 'KeyA'];
+        
+        document.addEventListener('keydown', (e) => {
+            konamiCode.push(e.code);
+            konamiCode = konamiCode.slice(-10);
+            
+            if (konamiCode.join('') === konamiSequence.join('')) {
+                document.body.style.animation = 'magical-sparkle 2s ease-in-out';
+                console.log('🎆 EXPECTO PATRONUM! Extra magic activated! 🦌✨');
+                
+                // Add magical sparkle animation
+                const style = document.createElement('style');
+                style.textContent = `
+                    @keyframes magical-sparkle {
+                        0%, 100% { filter: hue-rotate(0deg) brightness(1); }
+                        25% { filter: hue-rotate(90deg) brightness(1.2); }
+                        50% { filter: hue-rotate(180deg) brightness(1.5); }
+                        75% { filter: hue-rotate(270deg) brightness(1.2); }
+                    }
+                `;
+                document.head.appendChild(style);
+                
+                setTimeout(() => {
+                    document.body.style.animation = '';
+                }, 2000);
+            }
+        });
+    </script>
+</body>
+</html>
