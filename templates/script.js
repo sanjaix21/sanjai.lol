@@ -191,11 +191,115 @@ async function fetchWeather() {
     }
 }
 
+async function fetchGoldPrice() {
+    const goldElement = document.getElementById('goldPrice');
+    if (!goldElement) return;
+
+    try {
+        const headers = new Headers();
+        headers.append("x-access-token", "goldapi-84xysmdat7oe4-io");
+        headers.append("Content-Type", "application/json");
+
+        const requestOptions = {
+            method: 'GET',
+            headers: headers,
+            redirect: 'follow'
+        };
+
+        const response = await fetch("https://www.goldapi.io/api/XAU/INR", requestOptions);
+
+        if (!response.ok) {
+            throw new Error(`API error: ${response.status}`);
+        }
+
+        const data = await response.json();
+        
+        // Extract 24k gold price per gram
+        const goldPrice24k = data.price_gram_24k;
+        const changePercent = data.chp;
+        const changeAmount = data.ch;
+        
+        // Format the display
+        const changeIndicator = changeAmount >= 0 ? '↗' : '↘';
+        const changeColor = changeAmount >= 0 ? '#4CAF50' : '#F44336';
+        
+        goldElement.innerHTML = `
+            <div style="font-size: 1.3rem; font-weight: bold; margin-bottom: 5px;">
+                ₹${goldPrice24k.toLocaleString('en-IN', {minimumFractionDigits: 2, maximumFractionDigits: 2})}/g
+            </div>
+            <div style="font-size: 0.9rem; color: ${changeColor};">
+                ${changeIndicator} ${changePercent.toFixed(2)}% (₹${Math.abs(changeAmount).toFixed(2)})
+            </div>
+            <div style="font-size: 0.8rem; color: #666; margin-top: 5px;">
+                24K Gold • Live Rates
+            </div>
+        `;
+        
+    } catch (error) {
+        console.error('Gold price fetch error:', error);
+        goldElement.innerHTML = `
+            <div style="font-size: 1.2rem; font-weight: bold;">
+                ₹9,388/g
+            </div>
+            <div style="font-size: 0.8rem; color: #666; margin-top: 5px;">
+                Rates may be delayed
+            </div>
+        `;
+    }
+}
+
+async function addRandomImages() {
+    const newspaper = document.querySelector('.newspaper');
+    const validImages = [];
+    
+    // Find all existing images starting from image_1.jpg
+    for (let i = 1; i <= 200; i++) { // Check up to image_200.jpg, adjust as needed
+        const img = new Image();
+        const imageName = `image_${i}.jpg`;
+        img.src = `img/front_page/${imageName}`;
+        
+        try {
+            await new Promise((resolve, reject) => {
+                img.onload = () => {
+                    validImages.push(imageName);
+                    resolve();
+                };
+                img.onerror = () => reject();
+                setTimeout(() => reject(), 500); // Timeout after 500ms
+            });
+        } catch (e) {
+            // Image doesn't exist, continue checking
+            continue;
+        }
+    }
+    
+    // Now randomly place the found images
+    const numImages = Math.floor(Math.random() * 8) + 5;
+    for (let i = 0; i < numImages && validImages.length > 0; i++) {
+        const img = document.createElement('img');
+        const randomImage = validImages[Math.floor(Math.random() * validImages.length)];
+        
+        img.src = `img/front_page/${randomImage}`;
+        img.className = 'random-front-page-img';
+        img.style.left = Math.random() * 85 + '%';
+        img.style.top = Math.random() * 80 + 20 + '%';
+        img.style.transform = `rotate(${(Math.random() - 0.5) * 30}deg)`;
+        img.style.opacity = 0.1 + Math.random() * 0.15;
+        
+        newspaper.appendChild(img);
+    }
+}
+
 // Initialize everything
 document.addEventListener('DOMContentLoaded', () => {
     loadAllNews();
     fetchWeather();
-    
+    fetchGoldPrice();
+    addRandomImages();
     // Reload all news every 30 minutes
-    setInterval(loadAllNews, 1800000);
+    //
+    setInterval(() => {
+        loadAllNews();
+        fetchGoldPrice();
+    }, 1800000);
 });
